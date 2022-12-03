@@ -1,6 +1,7 @@
 import os
 
 import requests
+import json
 
 # 添加 server 酱通知
 server_key = os.environ["SERVER_KEY"]
@@ -31,7 +32,7 @@ def send_server(title, content):
 if __name__ == '__main__':
     checkInResp = requests.post(checkInUrl, headers=headers, cookies={'Cookie': jj_cookie})
     lotteryResp = requests.post(lotteryUrl, headers=headers, cookies={'Cookie': jj_cookie})
-    shortMsgResp = requests.post(postShortMsgUrl, headers=headers, cookies={'Cookie': jj_cookie}, params=shortMsg)
+    shortMsgResp = requests.post(postShortMsgUrl, headers=headers, cookies={'Cookie': jj_cookie}, data=json.dumps(shortMsg))
     resultMsg = "掘金签到结果\n" + checkInResp.text + "\n 掘金抽奖结果\n" + lotteryResp.text + "\n 沸点结果\n" + shortMsgResp.text
     if server_key:
         send_server('掘金签到+每日抽奖', resultMsg)
