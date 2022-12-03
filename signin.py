@@ -12,9 +12,13 @@ jj_cookie = os.environ["JJ_COOKIE"]
 baseUrl = 'https://api.juejin.cn/'
 checkInUrl = baseUrl + 'growth_api/v1/check_in'
 lotteryUrl = baseUrl + 'growth_api/v1/lottery/draw'
+postShortMsgUrl = baseUrl + 'content_api/v1/short_msg/publish?aid=2608&uuid=6901905951083841032&spider=0'
 
 # user-agent
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.106 Safari/537.36'}
+
+# shortMsgContent
+shortMsg = {"content":"[7163537723910225960#JUEJIN FRIENDS 好好生活计划#] [黑脸]好好生活，签到签到","sync_to_org":false,"theme_id":"7163537723910225960"}
 
 # server 酱消息推送
 def send_server(title, content):
@@ -27,7 +31,8 @@ def send_server(title, content):
 if __name__ == '__main__':
     checkInResp = requests.post(checkInUrl, headers=headers, cookies={'Cookie': jj_cookie})
     lotteryResp = requests.post(lotteryUrl, headers=headers, cookies={'Cookie': jj_cookie})
-    resultMsg = "掘金签到结果\n" + checkInResp.text + "\n 掘金抽奖结果\n" + lotteryResp.text
+    shortMsgResp = requests.post(postShortMsgUrl, headers=headers, cookies={'Cookie': jj_cookie}, params=shortMsg)
+    resultMsg = "掘金签到结果\n" + checkInResp.text + "\n 掘金抽奖结果\n" + lotteryResp.text + "\n 沸点结果\n" + shortMsgResp.text + shortMsgResp.err_msg
     if server_key:
         send_server('掘金签到+每日抽奖', resultMsg)
     else:
