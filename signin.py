@@ -18,7 +18,7 @@ postShortMsgUrl = baseUrl + 'content_api/v1/short_msg/publish?aid=2608&uuid=6901
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.106 Safari/537.36'}
 
 # shortMsgContent
-shortMsg = {"content":"[7163537723910225960#JUEJIN FRIENDS 好好生活计划#] [黑脸]好好生活，签到签到","sync_to_org":false,"theme_id":"7163537723910225960"}
+shortMsg = {"content":"[7163537723910225960#JUEJIN FRIENDS 好好生活计划#] [黑脸]好好生活，签到签到","sync_to_org":False,"theme_id":"7163537723910225960"}
 
 # server 酱消息推送
 def send_server(title, content):
